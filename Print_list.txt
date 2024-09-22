@@ -1,0 +1,24 @@
+import numpy as np
+from PIL import Image
+import subprocess
+import re
+from time import sleep
+from datetime import datetime
+import os
+import pyotp
+import pyperclip as pc
+import random
+import time
+
+ld_path = 'C:/LDPlayer/LDPlayer9/'
+#gét list list ld
+proc = subprocess.Popen (ld_path + '/ldconsole.exe list2', shell=True, stdout =subprocess.PIPE)
+serviceList = proc.stdout.readlines()
+list_ld = []
+# print(serviceList)
+for i in range(len(serviceList)):
+    serviceList[i] = str(serviceList[i])
+    serviceList[i] = serviceList[i].split(',')
+    if len(serviceList[i][0]) > 0:
+        list_ld.append(serviceList[i][1])
+print(list_ld)

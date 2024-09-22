@@ -1,0 +1,14 @@
+import subprocess
+
+ld_path = 'C:/LDPlayer/LDPlayer9/'  # Đường dẫn chính xác đến LDPlayer
+ld_name = 'LDPlayer'
+
+# Khởi chạy LDPlayer với tên giả lập (emulator name)
+launch_command = f"{ld_path}/dnconsole.exe launch --name {ld_name}"
+
+try:
+    # Khởi chạy LDPlayer
+    subprocess.run(launch_command, shell=True, check=True)
+    print(f"Đang mở {ld_name}...")
+except subprocess.CalledProcessError as e:
+    print(f"Không thể mở {ld_name}. Lỗi: {e}")

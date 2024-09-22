@@ -1,0 +1,47 @@
+import numpy as np
+from PIL import Image
+import subprocess
+import re
+from time import sleep
+from datetime import datetime
+import os
+import pyotp
+import pyperclip as pc
+import random
+import time
+
+ld_path = 'C:/LDPlayer/LDPlayer9/'
+#gét list list ld
+proc = subprocess.Popen (ld_path + '/ldconsole.exe list2', shell=True, stdout =subprocess.PIPE)
+serviceList = proc.stdout.readlines()
+list_ld = []
+# print(serviceList)
+for i in range(len(serviceList)):
+    serviceList[i] = str(serviceList[i])
+    serviceList[i] = serviceList[i].split(',')
+    if len(serviceList[i][0]) > 0:
+        list_ld.append(serviceList[i][1])
+print(list_ld)
+
+ld_name = 'LDPlayer'
+# Khởi chạy LDPlayer với tên giả lập (emulator name)
+launch_command = f"{ld_path}/dnconsole.exe launch --name {ld_name}"
+
+try:
+    # Khởi chạy LDPlayer
+    subprocess.run(launch_command, shell=True, check=True)
+    print(f"Đang mở {ld_name}...")
+except subprocess.CalledProcessError as e:
+    print(f"Không thể mở {ld_name}. Lỗi: {e}")
+
+proc = subprocess.Popen('E:/SELENIUM/CWIN/REG_2/ADB/adb.exe devices', shell=True, stdout= subprocess.PIPE)
+print(proc)
+serviceList = proc.communicate()[0].decode('ascii').split('\n')
+list_device = []
+for i in range(1, len(serviceList)-2):
+    try:
+        device = serviceList[i].split('\t')[0]
+        list_device.append(device)
+    except:
+        pass
+print(list_device)
